@@ -26,18 +26,67 @@ export default function Home() {
   
   const handleScroll = (e: WheelEvent | TouchEvent) => {
     const { scrollTop } = document.documentElement;
+    
+    if (e.type === 'wheel') {
+      const { deltaY } = e as WheelEvent;
+      if (deltaY > 0) {
+        // Scrolling down
+        console.log('scrolling down')
+        if (scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
+          if (timeoutId.current === null) {
+            timeoutId.current = setTimeout(() => {
+              setCurrentDivIndex((prevIndex) => prevIndex + 1);
+              timeoutId.current = null;
+            }, 500);
+          }
+        } else if (scrollTop === 0) {
+          if (timeoutId.current === null) {
+            timeoutId.current = setTimeout(() => {
+              setCurrentDivIndex((prevIndex) => prevIndex - 1);
+              timeoutId.current = null;
+            }, 500);
+          }
+        }
+      } else {
+        // Scrolling up
+        if (scrollTop + window.innerHeight === document.documentElement.scrollHeight && document.documentElement.scrollHeight > window.innerHeight) {
+          console.log('scrolling up')
+          if (timeoutId.current === null) {
+            timeoutId.current = setTimeout(() => {
+              setCurrentDivIndex((prevIndex) => prevIndex + 1);
+              timeoutId.current = null;
+            }, 500);
+          }
+        } else if (scrollTop === 0) {
+          if (timeoutId.current === null) {
+            timeoutId.current = setTimeout(() => {
+              setCurrentDivIndex((prevIndex) => prevIndex - 1);
+              timeoutId.current = null;
+            }, 500);
+          }
+        } else if (scrollTop > prevScrollTop.current) {
+          setCurrentDivIndex((prevIndex) => prevIndex + 1);
+        } else {
+          setCurrentDivIndex((prevIndex) => prevIndex - 1);
+        }
+      }
+    }
   
-    if (e.type === 'touchmove') {
+    else if (e.type === 'touchmove') {
       const touchEvent = e as TouchEvent;
-    const changedTouches = touchEvent.changedTouches;
-    const touch = changedTouches[0];
-    const deltaY = Math.abs(touch.pageY - prevScrollTop.current);
-    prevScrollTop.current = touch.pageY;
+      const changedTouches = touchEvent.changedTouches;
+      const touch = changedTouches[0];
+      const deltaY = Math.abs(touch.pageY - prevScrollTop.current);
+      prevScrollTop.current = touch.pageY;
   
       if (deltaY > threshold) {
         if (scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
           setCurrentDivIndex((prevIndex) => prevIndex + 1);
         } else if (scrollTop === 0) {
+          setCurrentDivIndex((prevIndex) => prevIndex - 1);
+        } else if (scrollTop > prevScrollTop.current) {
+          setCurrentDivIndex((prevIndex) => prevIndex + 1);
+        } else {
           setCurrentDivIndex((prevIndex) => prevIndex - 1);
         }
       }
@@ -56,9 +105,13 @@ export default function Home() {
             timeoutId.current = null;
           }, 500);
         }
+      } else if (scrollTop > prevScrollTop.current) {
+        setCurrentDivIndex((prevIndex) => prevIndex + 1);
+      } else {
+        setCurrentDivIndex((prevIndex) => prevIndex - 1);
       }
     }
-  
+    prevScrollTop.current = scrollTop;
     prevScrollHeight.current = document.documentElement.scrollHeight;
   };
   
@@ -74,11 +127,11 @@ export default function Home() {
   
 
 
-  const scrolltoHash = function (index: number) {
+  const scrollToSection = (sectionIndex: number) => {
     const container = document.querySelector('.container') as HTMLElement | null;
     if (container) {
       const sectionHeight = container.clientHeight;
-      const scrollTo = index * sectionHeight;
+      const scrollTo = sectionIndex * sectionHeight;
       container.scrollTo({
         top: scrollTo,
         behavior: 'smooth'
@@ -1059,13 +1112,13 @@ useEffect(() => {
       <div className="container">
         <div className="scrollable-menu">
           <div className="menu-items">
-            <div className='menu-item'><div onClick={() => scrolltoHash(0)}> &#91; who we are &#93;</div></div>
-            <div className='menu-item1'><div onClick={() => scrolltoHash(3)}> &#91; why we exist &#93;</div></div>
-            <div className='menu-item2'><div onClick={() => scrolltoHash(5)}> &#91; what we do &#93;</div></div>
-            <div className='menu-item3'><div onClick={() => scrolltoHash(9)}> &#91; whom we work for &#93;</div></div>
-            <div className='menu-item4'><div onClick={() => scrolltoHash(11)}> &#91; how we work &#93;</div></div>
-            <div className='menu-item5'><div onClick={() => scrolltoHash(12)}> &#91; journal &#93;</div></div>
-            <div className='menu-item6'><div onClick={() => scrolltoHash(14)}> &#91; contact | jobs &#93;</div></div>
+            <div className='menu-item'><div onClick={() => scrollToSection(0)}> &#91; who we are &#93;</div></div>
+            <div className='menu-item1'><div onClick={() => scrollToSection(4)}> &#91; why we exist &#93;</div></div>
+            <div className='menu-item2'><div onClick={() => scrollToSection(5)}> &#91; what we do &#93;</div></div>
+            <div className='menu-item3'><div onClick={() => scrollToSection(10)}> &#91; whom we work for &#93;</div></div>
+            <div className='menu-item4'><div onClick={() => scrollToSection(1)}> &#91; how we work &#93;</div></div>
+            <div className='menu-item5'><div onClick={() => scrollToSection(6)}> &#91; journal &#93;</div></div>
+            <div className='menu-item6'><div onClick={() => scrollToSection(9)}> &#91; contact | jobs &#93;</div></div>
           </div>
         </div>
         {sections.map((section, index) => (
@@ -1123,7 +1176,7 @@ useEffect(() => {
                 {section == '4' && (
                   <div className="parent">
                   <div className="parent w-1/2">
-                    <div className="prep1 text-black ml-16 text-xl sm:text-md md:text-md lg:text-xl xl:text-xl mb-8"  ref={ref3}>
+                    <div className="prep1 text-black ml-16 text-sm sm:text-md md:text-md lg:text-xl xl:text-xl mb-8"  ref={ref3}>
                       Our Vision is focused on the convergence of the technologies that will affect the way we live and work in the coming years: <br />
                       artificial intelligence, extended reality, blockchain, robotics, ...
                     <div className='prep2 text-black text-xl sm:text-xl md:text-md lg:text-xl xl:text-xl mb-8' ref={ref43}>
