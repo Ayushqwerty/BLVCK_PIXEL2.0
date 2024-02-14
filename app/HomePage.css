@@ -62,32 +62,30 @@
 }
 
 .animate {
+  visibility: hidden; /* Initially hidden */
   opacity: 0;
   transform: translateY(10vh);
-  animation: appear-from-bottom 2s ease forwards, fadeIn 3s ease 2s forwards;
+  animation: appear-from-bottom 1s ease 3s forwards, fadeIn 1s ease 3s forwards;
 }
 .animatethree {
   opacity: 0;
   transform: translateY(10vh);
   animation: appear-from-bottom 9s ease forwards, fadeIn 1s ease 10s forwards;
 }
-.animateFade{
+/* .animateFade{
   animation: fadeIn 2s ease-in-out forwards, fadeOut 1s ease-in-out 2s forwards;
-}
+} */
 .animateFadee{
-  animation: fadeIn 2s ease-in-out 5s forwards, slideUpp 2s ease-in 5s forwards;
+  animation: fadeIn 1s ease-in-out 2s forwards, slideUpp 1s ease-in 3s forwards;
 }
-.animateone{
-  transform: translateY(-10vh); /* Adjust the value as needed */
-  transition: transform 0.5s ease; 
+.animateone {
+  animation: fadeIn 1s ease-in-out forwards, slideUpp 1s ease-in 1s forwards;
 }
 
 .animatetwo {
-  transform: translateY(-40vh); /* Adjust the value as needed */
-  transition: transform 0.5s ease;  /* Final vertical position */
+  animation: fadeIn 1s ease-in-out forwards, slideUpp 1s ease-in 1s forwards;
 }
 .slide-up {
-  opacity: 0;
   animation: fadeIn 2s ease-in-out 2s forwards;
   animation: slideUpp 2s ease-in-out 1s forwards;
 }
@@ -98,10 +96,9 @@
 @keyframes slideUpp {
   from {
     transform: translateY(0);
-    opacity: 1;
   }
   to {
-    transform: translateY(-10vh);
+    transform: translateY(-50vh);
     opacity: 1;
   }
 }
@@ -120,7 +117,7 @@
   opacity: 0;
   left: 9vw;
   color: black;
-  animation: fadeIn 2s ease-in-out 10s forwards, slide-up 2s 12s forwards;
+  animation: fadeIn 2s ease-in-out 2s forwards, slide-up 2s 12s forwards;
 }
 
 .v.move-left {
@@ -201,7 +198,6 @@
   bottom: 10vh;
   left: 10vw;
   color: black;
-  animation: moveUp 1s ease-in-out 2s forwards;
 }
 .prep-head{
   bottom: 10vh;
@@ -210,15 +206,18 @@
   color: black;
 }
 .prep1 {
+  opacity: 0;
   animation-delay: 1s;
   margin-bottom: 5vh;
 }
 
 .prep2 {
+  opacity: 0;
   animation-delay: 2s;
   margin-bottom: 5vh;
 }
 .prep3 {
+  opacity: 0;
   animation-delay: 2s;
   margin-bottom: 5vh;
 }
@@ -238,7 +237,7 @@
   z-index: 2;
   position: fixed;
   top: 10vh;
-  right:0;
+  right:-20px;
   width: 200px; 
   height: 20vh;
   overflow: hidden;

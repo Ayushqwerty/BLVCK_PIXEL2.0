@@ -886,11 +886,11 @@ useEffect(() => {
 //   const observer = new IntersectionObserver(
 //     ([entry]) => {
 //       if (entry.isIntersecting) {
-//         if (ref40.current?.classList.contains("slide-upp")) {
-//           ref40.current.classList.remove("slide-upp");
+//         if (ref40.current?.classList.contains("animatetwop")) {
+//           ref40.current.classList.remove("animatetwop");
 //         }
 //         setTimeout(() => {
-//           ref40.current?.classList.add("slide-upp");
+//           ref40.current?.classList.add("animatetwop");
 //         }, 100);
 //       }
 //     },
@@ -926,11 +926,11 @@ useEffect(() => {
   const observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
-        if (ref42.current?.classList.contains("animateFadee")) {
-          ref42.current.classList.remove("animateFadee");
+        if (ref42.current?.classList.contains("animatetwo")) {
+          ref42.current.classList.remove("animatetwo");
         }
         setTimeout(() => {
-          ref42.current?.classList.add("animateFadee");
+          ref42.current?.classList.add("animatetwo");
         }, 100);
       }
     },
@@ -1023,7 +1023,7 @@ useEffect(() => {
                       The foresight Company
                     </span>
                   </div>
-                  <div className='slide-upp'>
+                  <div className='animatetwop'>
                     &#91; foresight &#93;
                   </div>
                   <div className="childDiv">
@@ -1040,7 +1040,7 @@ useEffect(() => {
                   <span className="blvckPixell text-3xl"ref={ref}></span>
                 </div>
                 <div className="childDiv">
-                  <span className="v text-3xl mr-8" ref={ref42}>V = &#91; vision &#93;</span>
+                  <span className="v text-xl md:text-2xl lg:text-3xl xl:text-3xl mr-8 font-bold" ref={ref42}>V = &#91; vision &#93;</span>
                 </div>
                 <div className="childDiv">
                   <p className='paragraph1 text-2xl italic xl:w-2/5'ref={ref2}>The act of using imagination and wisdom to set meaningful and inspiring goals grounded with purpose.</p>
@@ -1050,7 +1050,7 @@ useEffect(() => {
                 {section == '4' && (
                   <div className="parent">
                   <div className="parent w-1/2">
-                    <div className="prep1 text-black text-2xl ml-16"  ref={ref3}>
+                    <div className="prep1 text-black ml-16 text-sm md:text-md lg:text-xl xl:text-xl"  ref={ref3}>
                       Our Vision is focused on the convergence of the technologies that will affect the way we live and work in the coming years: <br />
                       artificial intelligence, extended reality, blockchain, robotics, ...
                     <br />
@@ -1066,13 +1066,13 @@ useEffect(() => {
             {section === '5' && (
               <div className="parent">
                 <div className="childDiv">
-                  <div className='prep text-black text-3xl mb-8' ref={ref4}>
+                  <div className='prep text-black text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-8' ref={ref4}>
                     &#91; anthropology + technology &#93;
                   </div>
                 </div>
-                  <div className='prep-head w-1/2' ref={ref5}>
+                  <div className='prep-head w-1/2 text-sm md:text-md lg:text-xl xl:text-xl' ref={ref5}>
                     <div className="prep1 text-black xl:text-2xl sm:text-xl">
-                      This best defines what we do at BLVCKPIXEL
+                      This best defines what we do at BLVCK<i>PIXEL</i>
                     </div>
 
                     <div className="prep2 text-black xl:text-2xl sm:text-xl" ref={ref39}>
@@ -1083,14 +1083,14 @@ useEffect(() => {
             )}
             {section === '6' && (
               <div className="parent">
-                  <div className="para-exist w-1/2">
-                    <div className="prep1 text-black xl:text-2xl sm:text-xl" ref={ref6}>
+                  <div className="para-exist w-1/2  text-sm md:text-md lg:text-xl xl:text-xl">
+                    <div className="prep1 text-black xl:text-2xl " ref={ref6}>
                       The stone ax, the wheel, the steam engine, the computer, and now AI - the advancement of humanity has always been driven by our ability to innovate. No other technology will have been as impactful on our world as artificial intelligence.
                     </div>
-                    <div className="prep2 text-black xl:text-2xl sm:text-xl" ref={ref7}>
+                    <div className="prep2 text-black xl:text-2xl " ref={ref7}>
                       We attempt to foresee these developments at all levels.
                     </div>
-                    <div className="prep3 text-black xl:text-2xl sm:text-xl" ref={ref8}>
+                    <div className="prep3 text-black xl:text-2xl" ref={ref8}>
                       The emergence of cognitive technologies will result in the most rapid socio-economic disruption since the beginning of recorded history. In the next few years, no matter the enterprise, government or organization, every business and operational model will have to adapt, and evolve.
                     </div>
                   </div>
@@ -1101,16 +1101,16 @@ useEffect(() => {
             {section === '7' && (
               <div className="parent">
                 <div className="childDiv">
-                  <div className='prep xl:text-3xl sm:text-xl' ref={ref9}>
+                  <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xll sm:text-xl' ref={ref9}>
                     &#91; services &#93;
                   </div>
                 </div>
-                  <div className='prep-head text-black w-1/2 sm:text-xl'>
+                  <div className='prep-head text-black w-1/2  text-sm md:text-md lg:text-xl xl:text-xl'>
                     <div className='prep1' ref={ref10}>
-                      Through advisory, consulting, strategic planning, prototyping, and realization, we prepare and transition our clients into the age of artificial general intelligence
+                      <i>Through advisory, consulting, strategic planning, prototyping, and realization, we prepare and transition our clients into the age of artificial general intelligence</i>
                     </div>
                     <div className='prep2' ref={ref11}>
-                      Our future proofing services is a 3 stages cycle of foresight, preparation, and implementation.
+                      <i>Our future proofing services is a 3 stages&apos; cycle of <span>foresight</span>, <span>preparation</span>, and <span>implementation</span>.</i>
                     </div>
                   </div>
                 </div>
@@ -1118,15 +1118,15 @@ useEffect(() => {
             {section === '8' && (
               <div className="parent">
                 <div className="childDiv">
-                  <div className='prep xl:text-3xl sm:text-xl' ref={ref12}>
+                  <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl sm:text-xl' ref={ref12}>
                     [ what&apos;s after next ]
                   </div>
                 </div>
-                  <div className='prep-head text-black w-1/2 sm:text-xl'>
-                    <div className='prep1' ref={ref13}>
-                      Foresight | 3-5 years ahead
+                  <div className='prep-head text-black w-1/2'>
+                    <div className='prep1 text-md md:text-xl lg:text-2xl xl:text-2xl' ref={ref13}>
+                      <span>Foresight</span> | 3-5 years ahead
                     </div>
-                    <div className='prep2' ref={ref14}>
+                    <div className='prep2 text-sm md:text-md lg:text-xl xl:text-xl' ref={ref14}>
                       -Foresight Forum Conferences: expertise on future tech <br /> -Strategic Foresight Reports: bespoke research and presentations
                     </div>
                 </div>
@@ -1135,15 +1135,15 @@ useEffect(() => {
             {section === '9' && (
               <div className="parent">
                 <div className="childDiv">
-                  <div className='prep xl:text-3xl sm:text-xl' ref={ref15}>
+                  <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl sm:text-xl' ref={ref15}>
                     [ what&apos;s next ]
                   </div>
                 </div>
                   <div className='prep-head text-black w-1/2 sm:text-xl'>
-                    <div className='prep1' ref={ref16}>
-                      Preparation | 1-2 years ahead
+                    <div className='prep1 text-xl md:text-2xl lg:text-3xl xl:text-3xl' ref={ref16}>
+                      <span>Preparation</span> | 1-2 years ahead
                     </div>
-                    <div className='prep2' ref={ref17}>
+                    <div className='prep2 text-sm md:text-md lg:text-xl xl:text-xl' ref={ref17}>
                       -Development of strategies to respond to rapidly evolving markets<br /> 
                       -Research and conception of innovative workplace systems <br />
                       -Research and ideation of innovative business models based on emerging technologies <br />
@@ -1155,14 +1155,14 @@ useEffect(() => {
             )}
             {section === '10' && (
               <div className="parent">
-                  <div className='prep xl:text-3xl sm:text-xl' ref={ref18}>
+                  <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl sm:text-xl' ref={ref18}>
                     [ what&apos;s today ]
                   </div>
                   <div className='prep-head text-black w-1/2 sm:text-xl' ref={ref19}>
                     <div className='prep1'>
-                      Implementation | Now!
+                      <span>Implementation</span> | Now!
                     </div>
-                    <div className='prep1' ref={ref20}>
+                    <div className='prep2  text-sm md:text-md lg:text-xl xl:text-xl' ref={ref20}>
                       -Conception off real-world business cases and use cases<br />
                       -Innovation workshops for management, product development, and marketing teams <br />
                       -Prototyping of innovative business models and workplace systems <br />
@@ -1175,31 +1175,31 @@ useEffect(() => {
              <div id='whom-we-work-for' className='section'>
             {section === '11' && (
               <div className="parent">
-            <div  className='prep xl:text-3xl sm:text-xl' ref={ref21}>
+            <div  className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl mt-64' ref={ref21}>
               &#91; clients &#93;
             </div>
-            <div className='prep-head text-2xl mb-12' ref={ref22}>
-              They inspire us. <br />
-              We advise them. <br />
-              We innovate as one.
+            <div className='prep-head text-sm md:text-md lg:text-xl xl:text-xl' ref={ref22}>
+              They <span><i>inspire</i></span> us. <br />
+              We <span><i>advise</i></span> them. <br />
+              We <span><i>innovate</i></span> as one.
               {/* slider here */}
             </div>
             </div>
             )}
             {section === '12' && (
               <div className="parent">
-            <div className='prep xl:text-3xl sm:text-xl mb-32' ref={ref23}>
+            <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-32' ref={ref23}>
               &#91; you &#93;   
             </div>
             <div className='prep-head text-black w-1/2 sm:text-xl'>
-            <div className='prep1' ref={ref24}>
+            <div className='prep1  text-sm md:text-md lg:text-xl xl:text-xl' ref={ref24}>
               We are priviliged to work with some of the most legendary clients and well-loved global brands.
             </div>
-            <div className='prep2'ref={ref25}>
+            <div className='prep2 text-sm md:text-md lg:text-xl xl:text-xl'ref={ref25}>
               They trust us to deliver informative research, strategic planning reports, educational experiences , workplace and business innovationss, use case prototypes.
             </div>
-            <div className='prep3' ref={ref26}>
-              If you would like to join this illustrious circle of clients please contact us to start the conversation: <Link href='hello@blvckpixel.com'>hello@blvckpixel.com</Link>
+            <div className='prep3 text-sm md:text-md lg:text-xl xl:text-xl' ref={ref26}>
+              If you would like to join this illustrious circle of clients please contact us to start the conversation: <Link href='hello@blvckpixel.com'><span>hello@blvckpixel.com</span></Link>
             </div>
             </div>
             </div>
@@ -1208,27 +1208,27 @@ useEffect(() => {
              <div id='how-we-work' className='section'>
             {section === '13' && (
               <div className="parent">
-            <div className='prep xl:text-3xl sm:text-xl' ref={ref27}>
+            <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl' ref={ref27}>
               &#91; our team + partners &#93;
             </div>
-            <div className='prep-head text-black w-1/2 sm:text-xl'>
-            <div className='prep1' ref={ref28}>
-              What makes our team so different?
+            <div className='prep-head text-black w-1/2'>
+            <div className='prep1 text-sm md:text-md lg:text-xl xl:text-xl' ref={ref28}>
+             <i> What makes our team so different?</i>
             </div>
-            <div className='prep2' ref={ref29}>
-              It&apos;s all about our unique set up and perspective on the future. Beyond being &#91; thought-leaders &#93; and &#91; visionaries &#93;, we are &#91; builders &#93;.
+            <div className='prep2 text-sm md:text-md lg:text-xl xl:text-xl' ref={ref29}>
+             <i>It&apos;s all about our unique set up and perspective on the future. Beyond being</i>  &#91; thought-leaders &#93; <i>and</i> &#91; visionaries &#93;, <i>we are</i>&#91; builders &#93;.
             </div>
             </div>
             </div>
             )}
             {section === '14' && (
               <div className="parent">
-            <div className='prep xl:text-3xl sm:text-xl mb-16' ref={ref30}>
+            <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-16' ref={ref30}>
               &#91; ideation &#93;
             </div>
-            <div className='prep-head text-black w-1/2 sm:text-xl'>
+            <div className='prep-head text-black w-1/2 text-sm md:text-md lg:text-xl xl:text-xl'>
             <div className='prep1' ref={ref31}>
-              Strategists, technologists, futurists and creatives, <i>BLVCKPIXEL</i> is driven by our desire to prepare humanity for the incredible changes to come n our societies.
+              Strategists, technologists, futurists and creatives, BLVCK<i>PIXEL</i> is driven by our desire to prepare humanity for the incredible changes to come n our societies.
             </div>
             <div className='prep2' ref={ref32}>
               Led by Teddy Pahagbia, one of the most singular voices in the emerging tech industry, the core team is backed by a global network of experts who create convergence-ready innovations for our clients.
@@ -1238,10 +1238,10 @@ useEffect(() => {
             )}
             {section === '15' && (
             <div className="parent">
-            <div className='prep xl:text-3xl sm:text-xl' ref={ref33}>
+            <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl' ref={ref33}>
               &#91; production &#93;
             </div>
-            <div className='prep-head text-black w-1/2 sm:text-xl'>
+            <div className='prep-head text-black w-1/2 text-sm md:text-md lg:text-xl xl:text-xl'>
             <div className='prep1' ref={ref34}>
               In addition, our partners bring complementary services that assure the readiness and scalability of our use cases and new business models.
             </div>
@@ -1254,18 +1254,18 @@ useEffect(() => {
             <div id='contact-jobs' className='section'></div>
             {section === '16' && (
             <div className="parent">
-            <div className='prep xl:text-3xl sm:text-xl mb-8' ref={ref35}>
+            <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-8' ref={ref35}>
               &#91; get in touch &#93;
             </div>
-            <div className='prep-head text-black w-1/2 sm:text-xl'>
+            <div className='prep-head text-black w-1/2 text-sm md:text-md lg:text-xl xl:text-xl'>
             <div className='prep1' ref={ref36}>
-              let&apos;s talk + meet + collaborate
+              <i>let&apos;s talk + meet + collaborate</i>
             </div>
             <div className='prep2' ref={ref37}>
-              Fell free to ping us if you want to chat, we&apos;sll be happy to share a coffee in our Paris headquarters or a fresh juice in our Dubai bureau.
+              Fell free to ping us if you want to chat, we&apos;sll be happy to share a coffee in our <span>Paris</span> headquarters or a fresh juice in our <span>Dubai</span> bureau.
           </div>
           <div className='prep3'  ref={ref38}>
-            And yes, we&apos;re always looking for talents. ;&nbsp;
+            And yes, we&apos;re always looking for <span>talents</span>. ;&nbsp;
           </div>
           </div>
           </div>
