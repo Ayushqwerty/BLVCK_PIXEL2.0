@@ -1179,10 +1179,10 @@ useEffect(() => {
                     <div className="prep1 text-black ml-16 text-sm sm:text-md md:text-md lg:text-xl xl:text-xl mb-8"  ref={ref3}>
                       Our Vision is focused on the convergence of the technologies that will affect the way we live and work in the coming years: <br />
                       artificial intelligence, extended reality, blockchain, robotics, ...
-                    <div className='prep2 text-black text-xl sm:text-xl md:text-md lg:text-xl xl:text-xl mb-8' ref={ref43}>
+                    <div className='prep2 text-black text-sm sm:text-xl md:text-md lg:text-xl xl:text-xl mb-8' ref={ref43}>
                       By staying ahead of current trends we future-proof our clients so that they anticipate, leap forward, and develop new operation models that align with what is to come.
                       </div>
-                      <div className='prep3 text-black text-xl sm:text-xl md:text-xl lg:text-xl xl:text-xl' ref={ref44}>
+                      <div className='prep3 text-black text-sm sm:text-xl md:text-xl lg:text-xl xl:text-xl' ref={ref44}>
                       We look beyond &#91; what&apos;s next &#93;. to what&apos;s &#91; after next &#93;.
                       </div>
                     </div>
