@@ -15,33 +15,65 @@ const sections = ['1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 
 
 
 export default function Home() {
+
+
+
   const [currentDivIndex, setCurrentDivIndex] = useState(0);
   const childDivHeight = 100;
-  const threshold = 1; // You can adjust this value based on your preference
-  
+  const threshold = 10; // You can adjust this value based on your preference
+  const scrollRef = useRef(null);
+
   const handleScroll = (e: { deltaY: number; }) => {
     const deltaY = Math.abs(e.deltaY);
-  
+
     if (deltaY > threshold) {
       const { clientHeight, scrollTop } = document.documentElement;
       const availableHeight = clientHeight + scrollTop;
-  
+
       if (e.deltaY > 0 && currentDivIndex < sections.length - 1 && availableHeight === document.documentElement.scrollHeight) {
         // Scroll down
-        setCurrentDivIndex((prevIndex: number) => prevIndex + 1);
+        setCurrentDivIndex((prevIndex) => prevIndex + 1);
       } else if (e.deltaY < 0 && currentDivIndex > 0 && scrollTop === 0) {
         // Scroll up
-        setCurrentDivIndex((prevIndex: number) => prevIndex - 1);
+        setCurrentDivIndex((prevIndex) => prevIndex - 1);
       }
     }
   };
-  
+  const handleScrollEnd = () => {
+    const { clientHeight, scrollTop } = document.documentElement;
+    const availableHeight = clientHeight + scrollTop;
+
+    if (availableHeight === document.documentElement.scrollHeight) {
+      // Scroll down
+      setCurrentDivIndex((prevIndex) => prevIndex + 1);
+    } else if (scrollTop === 0) {
+      // Scroll up
+      setCurrentDivIndex((prevIndex) => prevIndex - 1);
+    }
+  };
   useEffect(() => {
+    const handleScrollEndDebounced = debounce(handleScrollEnd, 500);
+
     window.addEventListener('wheel', handleScroll);
+    window.addEventListener('scroll', handleScrollEndDebounced);
+
     return () => {
       window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('scroll', handleScrollEndDebounced);
     };
   }, [threshold, currentDivIndex]);
+
+  // Debounce function
+  const debounce = (func: (this: any, ...args: any[]) => void, wait: number | undefined) => {
+    let timeout: string | number | NodeJS.Timeout | undefined;
+    return function (this: any, ...args: any[]) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  };
+
+
+
   const scrolltoHash = function (index: number) {
     const container = document.querySelector('.container') as HTMLElement | null;
     if (container) {
@@ -106,11 +138,11 @@ export default function Home() {
       ([entry]) => {
         if (entry.isIntersecting) {
           console.log('it is intersecting', entry)
-          if (ref2.current?.classList.contains("animatethree")) {
-            ref2.current.classList.remove("animatethree");
+          if (ref2.current?.classList.contains("animate")) {
+            ref2.current.classList.remove("animate");
           }
           setTimeout(() => {
-            ref2.current?.classList.add("animatethree");
+            ref2.current?.classList.add("animate");
           }, 100);
         }
       },
@@ -941,6 +973,46 @@ useEffect(() => {
 
   return () => observer.disconnect();
 }, []);
+const ref43 = useRef<HTMLDivElement>(null);
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        if (ref43.current?.classList.contains("animate")) {
+          ref43.current.classList.remove("animate");
+        }
+        setTimeout(() => {
+          ref43.current?.classList.add("animate");
+        }, 100);
+      }
+    },
+    { threshold: 0.6 }
+  );
+
+  observer.observe(ref43.current!);
+
+  return () => observer.disconnect();
+}, []);
+const ref44 = useRef<HTMLDivElement>(null);
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        if (ref44.current?.classList.contains("animate")) {
+          ref44.current.classList.remove("animate");
+        }
+        setTimeout(() => {
+          ref44.current?.classList.add("animate");
+        }, 100);
+      }
+    },
+    { threshold: 0.6 }
+  );
+
+  observer.observe(ref44.current!);
+
+  return () => observer.disconnect();
+}, []);
   
   return (
     <>
@@ -999,6 +1071,7 @@ useEffect(() => {
         {sections.map((section, index) => (
           <div
             key={index}
+            ref={scrollRef}
             className={`childDiv ${currentDivIndex === index ? 'visible' : 'hidden'}`}
             style={{ transform: `translateY(-${currentDivIndex * childDivHeight}vh)` }}
           >
@@ -1040,23 +1113,25 @@ useEffect(() => {
                   <span className="blvckPixell text-3xl"ref={ref}></span>
                 </div>
                 <div className="childDiv">
-                  <span className="v text-xl md:text-2xl lg:text-3xl xl:text-3xl mr-8 font-bold" ref={ref42}>V = &#91; vision &#93;</span>
+                  <span className="prep text-xl md:text-2xl lg:text-3xl xl:text-3xl mr-8" ref={ref42}>V = &#91; vision &#93;</span>
                 </div>
                 <div className="childDiv">
-                  <p className='paragraph1 text-2xl italic xl:w-2/5'ref={ref2}>The act of using imagination and wisdom to set meaningful and inspiring goals grounded with purpose.</p>
+                  <p className='paragraph1 italic xl:w-2/5 text-xl md:text-xl lg:text-xl xl:text-xl'ref={ref2}>The act of using imagination and wisdom to set meaningful and inspiring goals grounded with purpose.</p>
                 </div>
                 </div>
                 )}
                 {section == '4' && (
                   <div className="parent">
                   <div className="parent w-1/2">
-                    <div className="prep1 text-black ml-16 text-sm md:text-md lg:text-xl xl:text-xl"  ref={ref3}>
+                    <div className="prep1 text-black ml-16 text-xl sm:text-md md:text-md lg:text-xl xl:text-xl mb-8"  ref={ref3}>
                       Our Vision is focused on the convergence of the technologies that will affect the way we live and work in the coming years: <br />
                       artificial intelligence, extended reality, blockchain, robotics, ...
-                    <br />
+                    <div className='prep2 text-black text-xl sm:text-xl md:text-md lg:text-xl xl:text-xl mb-8' ref={ref43}>
                       By staying ahead of current trends we future-proof our clients so that they anticipate, leap forward, and develop new operation models that align with what is to come.
-                      <br />
+                      </div>
+                      <div className='prep3 text-black text-xl sm:text-xl md:text-xl lg:text-xl xl:text-xl' ref={ref44}>
                       We look beyond &#91; what&apos;s next &#93;. to what&apos;s &#91; after next &#93;.
+                      </div>
                     </div>
                     </div>
                 </div>
@@ -1101,7 +1176,7 @@ useEffect(() => {
             {section === '7' && (
               <div className="parent">
                 <div className="childDiv">
-                  <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xll sm:text-xl' ref={ref9}>
+                  <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl sm:text-xl' ref={ref9}>
                     &#91; services &#93;
                   </div>
                 </div>
@@ -1118,12 +1193,12 @@ useEffect(() => {
             {section === '8' && (
               <div className="parent">
                 <div className="childDiv">
-                  <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl sm:text-xl' ref={ref12}>
+                  <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl sm:text-xl mt-96' ref={ref12}>
                     [ what&apos;s after next ]
                   </div>
                 </div>
                   <div className='prep-head text-black w-1/2'>
-                    <div className='prep1 text-md md:text-xl lg:text-2xl xl:text-2xl' ref={ref13}>
+                    <div className='prep1 text-xl md:text-xl lg:text-2xl xl:text-2xl' ref={ref13}>
                       <span>Foresight</span> | 3-5 years ahead
                     </div>
                     <div className='prep2 text-sm md:text-md lg:text-xl xl:text-xl' ref={ref14}>
@@ -1140,7 +1215,7 @@ useEffect(() => {
                   </div>
                 </div>
                   <div className='prep-head text-black w-1/2 sm:text-xl'>
-                    <div className='prep1 text-xl md:text-2xl lg:text-3xl xl:text-3xl' ref={ref16}>
+                    <div className='prep1 text-xl md:text-xl lg:text-2xl xl:text-2xl' ref={ref16}>
                       <span>Preparation</span> | 1-2 years ahead
                     </div>
                     <div className='prep2 text-sm md:text-md lg:text-xl xl:text-xl' ref={ref17}>
@@ -1178,7 +1253,7 @@ useEffect(() => {
             <div  className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl mt-64' ref={ref21}>
               &#91; clients &#93;
             </div>
-            <div className='prep-head text-sm md:text-md lg:text-xl xl:text-xl' ref={ref22}>
+            <div className=' mb-64 prep-head text-sm md:text-md lg:text-xl xl:text-xl' ref={ref22}>
               They <span><i>inspire</i></span> us. <br />
               We <span><i>advise</i></span> them. <br />
               We <span><i>innovate</i></span> as one.
@@ -1188,7 +1263,7 @@ useEffect(() => {
             )}
             {section === '12' && (
               <div className="parent">
-            <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-32' ref={ref23}>
+            <div className='prep text-xl md:text-2xl lg:text-3xl xl:text-3xl mb-32  mb-12 sm:mb-8 md:mb-0 lg:mb-0 xl:mb-0' ref={ref23}>
               &#91; you &#93;   
             </div>
             <div className='prep-head text-black w-1/2 sm:text-xl'>
