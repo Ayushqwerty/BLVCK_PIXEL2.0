@@ -16,62 +16,62 @@ const sections = ['1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 
 
 export default function Home() {
 
-
-
   const [currentDivIndex, setCurrentDivIndex] = useState(0);
   const childDivHeight = 100;
   const threshold = 10; // You can adjust this value based on your preference
   const scrollRef = useRef(null);
-
-  const handleScroll = (e: { deltaY: number; }) => {
-    const deltaY = Math.abs(e.deltaY);
-
-    if (deltaY > threshold) {
-      const { clientHeight, scrollTop } = document.documentElement;
-      const availableHeight = clientHeight + scrollTop;
-
-      if (e.deltaY > 0 && currentDivIndex < sections.length - 1 && availableHeight === document.documentElement.scrollHeight) {
-        // Scroll down
-        setCurrentDivIndex((prevIndex) => prevIndex + 1);
-      } else if (e.deltaY < 0 && currentDivIndex > 0 && scrollTop === 0) {
-        // Scroll up
-        setCurrentDivIndex((prevIndex) => prevIndex - 1);
+  const prevScrollTop = useRef(0);
+  const prevScrollHeight = useRef(0);
+  const timeoutId = useRef<NodeJS.Timeout | null>(null);
+  
+  const handleScroll = (e: WheelEvent | TouchEvent) => {
+    const { scrollTop } = document.documentElement;
+  
+    if (e.type === 'touchmove') {
+      const touchEvent = e as TouchEvent;
+    const changedTouches = touchEvent.changedTouches;
+    const touch = changedTouches[0];
+    const deltaY = Math.abs(touch.pageY - prevScrollTop.current);
+    prevScrollTop.current = touch.pageY;
+  
+      if (deltaY > threshold) {
+        if (scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
+          setCurrentDivIndex((prevIndex) => prevIndex + 1);
+        } else if (scrollTop === 0) {
+          setCurrentDivIndex((prevIndex) => prevIndex - 1);
+        }
+      }
+    } else {
+      if (scrollTop + window.innerHeight === document.documentElement.scrollHeight) {
+        if (timeoutId.current === null) {
+          timeoutId.current = setTimeout(() => {
+            setCurrentDivIndex((prevIndex) => prevIndex + 1);
+            timeoutId.current = null;
+          }, 500);
+        }
+      } else if (scrollTop === 0) {
+        if (timeoutId.current === null) {
+          timeoutId.current = setTimeout(() => {
+            setCurrentDivIndex((prevIndex) => prevIndex - 1);
+            timeoutId.current = null;
+          }, 500);
+        }
       }
     }
+  
+    prevScrollHeight.current = document.documentElement.scrollHeight;
   };
-  const handleScrollEnd = () => {
-    const { clientHeight, scrollTop } = document.documentElement;
-    const availableHeight = clientHeight + scrollTop;
-
-    if (availableHeight === document.documentElement.scrollHeight) {
-      // Scroll down
-      setCurrentDivIndex((prevIndex) => prevIndex + 1);
-    } else if (scrollTop === 0) {
-      // Scroll up
-      setCurrentDivIndex((prevIndex) => prevIndex - 1);
-    }
-  };
+  
   useEffect(() => {
-    const handleScrollEndDebounced = debounce(handleScrollEnd, 500);
-
     window.addEventListener('wheel', handleScroll);
-    window.addEventListener('scroll', handleScrollEndDebounced);
-
+    window.addEventListener('touchmove', handleScroll);
+  
     return () => {
       window.removeEventListener('wheel', handleScroll);
-      window.removeEventListener('scroll', handleScrollEndDebounced);
+      window.removeEventListener('touchmove', handleScroll);
     };
   }, [threshold, currentDivIndex]);
-
-  // Debounce function
-  const debounce = (func: (this: any, ...args: any[]) => void, wait: number | undefined) => {
-    let timeout: string | number | NodeJS.Timeout | undefined;
-    return function (this: any, ...args: any[]) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-  };
-
+  
 
 
   const scrolltoHash = function (index: number) {
