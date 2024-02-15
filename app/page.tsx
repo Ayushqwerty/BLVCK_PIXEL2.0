@@ -18,12 +18,22 @@ export default function Home() {
 
   const [currentDivIndex, setCurrentDivIndex] = useState(0);
   const childDivHeight = 100;
-  const threshold = 100;
+  const threshold = 10000;
   const scrollRef = useRef(null);
   const prevScrollTop = useRef(0);
   const prevScrollHeight = useRef(0);
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
   
+
+  const handleTouchEnd = () => {
+    if (timeoutId.current === null) {
+      timeoutId.current = setTimeout(() => {
+        setCurrentDivIndex((prevIndex) => prevIndex + 1);
+        timeoutId.current = null;
+      }, 500); // Delay before transitioning to the next section
+    }
+  };
+
   const handleScroll = (e: WheelEvent | TouchEvent) => {
     const { scrollTop } = document.documentElement;
     
@@ -111,6 +121,9 @@ export default function Home() {
         setCurrentDivIndex((prevIndex) => prevIndex - 1);
       }
     }
+    if (e.type === 'touchend') {
+      handleTouchEnd();
+    }
     prevScrollTop.current = scrollTop;
     prevScrollHeight.current = document.documentElement.scrollHeight;
   };
@@ -118,10 +131,12 @@ export default function Home() {
   useEffect(() => {
     window.addEventListener('wheel', handleScroll);
     window.addEventListener('touchmove', handleScroll);
+    window.addEventListener('touchend', handleScroll); // Listen for touchend event
   
     return () => {
       window.removeEventListener('wheel', handleScroll);
       window.removeEventListener('touchmove', handleScroll);
+      window.removeEventListener('touchend', handleScroll);
     };
   }, [threshold, currentDivIndex]);
   
