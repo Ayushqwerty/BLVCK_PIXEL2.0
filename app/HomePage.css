@@ -62,7 +62,7 @@
 }
 
 .animate {
-  visibility: hidden; /* Initially hidden */
+  visibility: hidden;
   opacity: 0;
   transform: translateY(10vh);
   animation: appear-from-bottom 1s ease 3s forwards, fadeIn 1s ease 3s forwards;

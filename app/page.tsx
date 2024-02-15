@@ -18,7 +18,7 @@ export default function Home() {
 
   const [currentDivIndex, setCurrentDivIndex] = useState(0);
   const childDivHeight = 100;
-  const threshold = 10; // You can adjust this value based on your preference
+  const threshold = 100;
   const scrollRef = useRef(null);
   const prevScrollTop = useRef(0);
   const prevScrollHeight = useRef(0);
